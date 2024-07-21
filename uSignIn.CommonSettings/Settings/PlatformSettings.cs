@@ -1,4 +1,4 @@
-﻿namespace CommonSettings.Settings
+﻿namespace uSignIn.CommonSettings.Settings
 {
     public sealed class PlatformSettings
     {

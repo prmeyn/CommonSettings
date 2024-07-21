@@ -1,7 +1,7 @@
-﻿using CommonSettings.Settings;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
+using uSignIn.CommonSettings.Settings;
 
-namespace CommonSettings
+namespace uSignIn.CommonSettings
 {
 	public static class SeviceCollectionExtensions
 	{
