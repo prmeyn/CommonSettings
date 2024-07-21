@@ -31,11 +31,25 @@ After the above is done, you can just Dependency inject the `SettingsService` in
 
 #### For example:
 
-
+Here is a Sample Service `SampleService` C# class that injects the `SettingsService` and then uses the `_settingsService.BaseUri`
 
 ```csharp
-TODO
+using uSignIn.CommonSettings.Settings;
 
+namespace Test.Stuff
+{
+	public sealed class SampleService
+	{
+		private readonly SettingsService _settingsService;
+
+		public SampleService(
+			SettingsService settingsService
+		{
+			_settingsService = settingsService;
+		}
+		internal string NotificationUrl => new Uri(_settingsService.BaseUri, "/helloWorld").ToString();
+	}
+}
 ```
 
 ### GitHub Repository
