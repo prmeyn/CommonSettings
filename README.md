@@ -24,8 +24,10 @@ Then in your `appsettings.json` add the following sample configuration and chang
 ```json
   "Settings": {
     "BaseUrl": "https://[YOUR-HOSTNAME]",
+    "RequestTimeSpanRangeInMilliseconds": "-120000:120000"
   }
   ```
+The `RequestTimeSpanRangeInMilliseconds` example above means that all communication to the server cannot be replayed, as the server timestamp needs to match the client timestamp allowed within a range of -120 seconds to 120 seconds.
 
 After the above is done, you can just Dependency inject the `SettingsService` in your C# class.
 
