@@ -1,4 +1,4 @@
-﻿# uSignIn.CommonSettings(https://www.nuget.org/packages/uSignIn.CommonSettings)
+﻿# uSignIn.CommonSettings
 
 **uSignIn.CommonSettings** is an open-source C# class library that provides a wrapper around Common settings in the `appsettings.json`
 
