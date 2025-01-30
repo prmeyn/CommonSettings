@@ -10,7 +10,7 @@
 
 			if (latest == null)
 			{
-				throw new InvalidOperationException("No history records available.");
+				return default;
 			}
 
 			return latest.Value; // Guaranteed to be non-null
