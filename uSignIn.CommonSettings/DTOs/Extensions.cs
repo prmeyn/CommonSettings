@@ -1,5 +1,6 @@
 ﻿namespace uSignIn.CommonSettings.DTOs
 {
+	[Obsolete("User History instead.")]
 	public static class Extensions
 	{
 		public static DateOnly? GetLatest(this DateOnlyHistory[] dateOnlyHistories)
