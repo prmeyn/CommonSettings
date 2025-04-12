@@ -6,7 +6,7 @@ namespace uSignIn.CommonSettings.Settings
     public sealed class SettingsService
     {
 		private readonly ILogger<SettingsService> _logger;
-
+		public Uri FrontendUri { get; set; }
 		public Uri BaseUri { get; set; }
         public PlatformSettings Android { get; init; }
         public PlatformSettings iOS { get; init; }
@@ -19,7 +19,8 @@ namespace uSignIn.CommonSettings.Settings
         {
 			_logger = logger;
 			var settingsConfig = configuration.GetSection("Settings");
-            string? baseUrl = settingsConfig["BaseUrl"];
+			string? frontendUrl = settingsConfig["FrontendUrl"];
+			string? baseUrl = settingsConfig["BaseUrl"];
 
             if (string.IsNullOrWhiteSpace(baseUrl))
             {
@@ -47,7 +48,7 @@ namespace uSignIn.CommonSettings.Settings
 				logger.LogCritical("RequestTimeSpanRangeInMilliseconds is not configured correctly  Settings:RequestTimeSpanRangeInMilliseconds. {RequestTimeSpanRangeInMilliseconds}", requestTimeSpanRangeInMilliseconds);
 			}
 			logger.LogInformation("LowerLimitInMilliseconds is {LowerLimitInMilliseconds} & UpperLimitInMilliseconds is {UpperLimitInMilliseconds}", LowerLimitInMilliseconds, UpperLimitInMilliseconds);
-
+			FrontendUri = new Uri(frontendUrl);
 			BaseUri = new Uri(baseUrl);
 
             Android = settingsConfig.GetSection("Android").Get<PlatformSettings>();
