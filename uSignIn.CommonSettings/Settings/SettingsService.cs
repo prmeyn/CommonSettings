@@ -71,10 +71,6 @@ namespace uSignIn.CommonSettings.Settings
 			{
 				_logger.LogCritical("Request {Difference} TotalMilliseconds is not within {LowerLimitInMilliseconds} & {UpperLimitInMilliseconds}", difference, LowerLimitInMilliseconds, UpperLimitInMilliseconds);
 			}
-			else
-			{
-				_logger.LogInformation("Request {Difference} TotalMilliseconds is within {LowerLimitInMilliseconds} & {UpperLimitInMilliseconds}", difference, LowerLimitInMilliseconds, UpperLimitInMilliseconds);
-			}
 
 			return isWithinRange;
 		}
