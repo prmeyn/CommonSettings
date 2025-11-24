@@ -3,6 +3,11 @@
   <PropertyGroup>
 	<PackageLicenseFile>LICENSE</PackageLicenseFile>
 	<PackageReadmeFile>README.md</PackageReadmeFile>
+	<RepositoryUrl>https://github.com/prmeyn/CommonSettings</RepositoryUrl>
+	<RepositoryType>git</RepositoryType>
+	<PackageProjectUrl>https://github.com/prmeyn/CommonSettings</PackageProjectUrl>
+	<Description>A robust C# class library for centralized configuration management and request validation for the uSignIn ecosystem.</Description>
+	<PackageTags>configuration;settings;appsettings;validation;usignin</PackageTags>
     <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>

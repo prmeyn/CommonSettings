@@ -1,5 +1,8 @@
 ﻿# uSignIn.CommonSettings
 
+[![NuGet](https://img.shields.io/nuget/v/uSignIn.CommonSettings.svg)](https://www.nuget.org/packages/uSignIn.CommonSettings)
+[![GitHub](https://img.shields.io/badge/github-CommonSettings-blue.svg)](https://github.com/prmeyn/CommonSettings)
+
 **uSignIn.CommonSettings** is a robust C# class library designed to centralize configuration management and provide essential validation logic for the uSignIn ecosystem. It acts as a strongly-typed wrapper around `appsettings.json`, ensuring consistency and safety across your projects.
 
 ## Features
@@ -11,11 +14,13 @@
 
 ## Installation
 
-Install the NuGet package via the .NET CLI:
+Install the [NuGet package](https://www.nuget.org/packages/uSignIn.CommonSettings) via the .NET CLI:
 
 ```bash
 dotnet add package uSignIn.CommonSettings
 ```
+
+Or via the NuGet Package Manager in Visual Studio.
 
 ## Configuration
 
@@ -108,7 +113,7 @@ History<string>? latestRecord = loginHistory.LatestRecord();
 
 ## Contributing
 
-We welcome contributions! If you find a bug or have an idea for improvement, please submit an issue or a pull request on GitHub.
+We welcome contributions! If you find a bug or have an idea for improvement, please submit an issue or a pull request on our [GitHub repository](https://github.com/prmeyn/CommonSettings).
 
 ## License
 
