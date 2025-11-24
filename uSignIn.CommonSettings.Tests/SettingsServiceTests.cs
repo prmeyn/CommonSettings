@@ -2,7 +2,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Moq;
 using uSignIn.CommonSettings.Settings;
-using Xunit;
 
 namespace uSignIn.CommonSettings.Tests
 {

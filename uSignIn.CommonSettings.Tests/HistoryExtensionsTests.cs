@@ -1,5 +1,4 @@
 using uSignIn.CommonSettings.DTOs;
-using Xunit;
 
 namespace uSignIn.CommonSettings.Tests
 {
