@@ -49,15 +49,30 @@ Add the following `Settings` section to your `appsettings.json`. Adjust the valu
 - **`BaseUrl`**: The root URL for your backend API.
 - **`FrontendUrl`**: The root URL for your frontend application.
 - **`RequestTimeSpanRangeInMilliseconds`**: Defines the valid time window for requests relative to the server time.
-  - Format: `"LowerLimit:UpperLimit"` (in milliseconds).
+  - Format: `"LowerLimit:UpperLimit"` (in milliseconds). Both limits are offsets of the request timestamp from server time: a **negative** limit lies in the past, a **positive** limit in the future. `LowerLimit` must be less than or equal to `UpperLimit`.
   - Example `"-120000:120000"` means a request timestamp is valid if it is between **2 minutes in the past** and **2 minutes in the future**.
-- **`Android` / `iOS`**: Platform-specific settings used for deep linking or redirects.
+  - Asymmetric windows are supported: `"-600000:1000"` tolerates **10 minutes of age** but only **1 second of future clock skew**.
+  - Values are parsed with the invariant culture, so the same configuration behaves identically on every host regardless of locale. Do not use group separators — `"-60.000"` is read as -60 milliseconds, not -60000.
+  - If the value is missing or malformed, a critical message is logged and the default `"-180000000:120000"` (50 hours of age, 2 minutes of future skew) is used.
+- **`Android` / `iOS`**: Platform-specific settings used for deep linking or redirects. Optional — when a section is absent a warning is logged and `Scheme`/`Host` are empty strings rather than `null`.
 
 ## Usage
 
-### 1. Settings Service
+### 1. Registering the services
 
-Register the service in your Dependency Injection container (if not already handled by a startup extension) and inject `SettingsService` into your classes.
+Call `AddCommonSettingsServices()` on your service collection during startup. It registers `SettingsService` as a singleton and is safe to call more than once.
+
+```csharp
+using uSignIn.CommonSettings;
+
+builder.Services.AddCommonSettingsServices();
+```
+
+`SettingsService` reads and validates configuration when it is first constructed, throwing `InvalidOperationException` if `Settings:BaseUrl` or `Settings:FrontendUrl` is missing or is not an absolute URL.
+
+### 2. Settings Service
+
+Inject `SettingsService` into your classes.
 
 ```csharp
 using uSignIn.CommonSettings.Settings;
@@ -85,13 +100,13 @@ public class MyService
         // Check if the request is within the allowed time window
         if (!_settings.IsFresh(requestTime))
         {
-            throw new Exception("Request is expired or invalid.");
+            throw new InvalidOperationException("Request is expired or invalid.");
         }
     }
 }
 ```
 
-### 2. History Tracking
+### 3. History Tracking
 
 Use the `History<T>` DTO and `HistoryExtensions` to manage historical data.
 

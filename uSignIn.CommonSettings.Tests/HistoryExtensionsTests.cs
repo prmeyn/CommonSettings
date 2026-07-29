@@ -37,6 +37,19 @@ namespace uSignIn.CommonSettings.Tests
         }
 
         [Fact]
+        public void LatestValue_ShouldReturnDefault_WhenSequenceIsNull()
+        {
+            // Arrange
+            IEnumerable<History<string>>? history = null;
+
+            // Act
+            var result = history.LatestValue();
+
+            // Assert
+            Assert.Null(result);
+        }
+
+        [Fact]
         public void LatestRecord_ShouldReturnMostRecentRecord()
         {
             // Arrange
@@ -50,6 +63,45 @@ namespace uSignIn.CommonSettings.Tests
 
             // Assert
             Assert.Same(recent, result);
+        }
+
+        [Fact]
+        public void LatestRecord_ShouldReturnNull_WhenSequenceIsNull()
+        {
+            // Arrange
+            IEnumerable<History<int>>? history = null;
+
+            // Act
+            var result = history.LatestRecord();
+
+            // Assert
+            Assert.Null(result);
+        }
+
+        [Fact]
+        public void LatestRecord_ShouldReturnNull_WhenListIsEmpty()
+        {
+            // Act
+            var result = new List<History<int>>().LatestRecord();
+
+            // Assert
+            Assert.Null(result);
+        }
+
+        [Fact]
+        public void LatestRecord_ShouldReturnFirstOfTiedRecords_WhenTimeStampsAreEqual()
+        {
+            // Arrange
+            var timeStamp = DateTimeOffset.UtcNow;
+            var first = new History<int> { Value = 1, TimeStamp = timeStamp };
+            var second = new History<int> { Value = 2, TimeStamp = timeStamp };
+            var history = new List<History<int>> { first, second };
+
+            // Act
+            var result = history.LatestRecord();
+
+            // Assert
+            Assert.Same(first, result);
         }
     }
 }
