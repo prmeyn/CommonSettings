@@ -38,7 +38,7 @@ namespace uSignIn.CommonSettings.Tests
                 x => x.Log(
                     level,
                     It.IsAny<EventId>(),
-                    It.Is<It.IsAnyType>((v, t) => v.ToString()!.Contains(expectedFragment)),
+                    It.Is<It.IsAnyType>((v, t) => v != null && v.ToString()!.Contains(expectedFragment)),
                     It.IsAny<Exception>(),
                     It.IsAny<Func<It.IsAnyType, Exception?, string>>()),
                 times);
